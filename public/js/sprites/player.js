@@ -25,6 +25,9 @@
     // super constructor call
     Phaser.Sprite.call(this, game, 0, 0, JumpPunch.ASSETS.SPRITESHEET.PLAYER.name);
 
+    // set center registration point
+    this.anchor = {x: 0.5, y: 0.5};
+
     // set animations
     this.animations.add(ANIMATIONS.IDLE.name, ANIMATIONS.IDLE.frames);
 
