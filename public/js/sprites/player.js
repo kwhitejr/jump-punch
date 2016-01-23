@@ -10,11 +10,17 @@
     }
   };
 
+  var FACING_FACTOR = {
+    LEFT : -1,
+    RIGHT : 1
+  };
+
   // sprite class constructor
   JumpPunch.Player = function (game, id, name) {
     this.game = game;
     this.id = id;
     this.name = name? name : 'Player '+(id+1);
+    this.facing; //direction that player is facing, state updates this. game state knows this about each player
 
     // super constructor call
     Phaser.Sprite.call(this, game, 0, 0, JumpPunch.ASSETS.SPRITESHEET.PLAYER.name);
@@ -32,5 +38,19 @@
       value: JumpPunch.Player
     }
   });
+
+  // public statis variable
+  JumpPunch.Player.FACING = {
+    LEFT : 'LEFT',
+    RIGHT : 'RIGHT'
+  };
+
+  // is invoked on every frame
+  JumpPunch.Player.prototype.update = function(){
+
+    // update player facing
+    this.scale.x = FACING_FACTOR[ this.facing ];
+
+  };
 
 })();

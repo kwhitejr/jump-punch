@@ -12,6 +12,7 @@
 
     this.player_1;
     this.player_2;
+    this.facing; // direction that player faces
   };
 
   JumpPunch.Game.prototype.create = function () {
@@ -30,6 +31,14 @@
 
   JumpPunch.Game.prototype.update = function () {
 
+    // determine which direction each player is facing
+    if ( this.player_1.x < this.player_2.x) {
+      this.player_1.facing = JumpPunch.Player.FACING.RIGHT;
+      this.player_2.facing = JumpPunch.Player.FACING.LEFT;
+    } else {
+      this.player_1.facing = JumpPunch.Player.FACING.LEFT;
+      this.player_2.facing = JumpPunch.Player.FACING.RIGHT;
+    }
   };
 
   JumpPunch.Game.prototype.shutdown = function () {
