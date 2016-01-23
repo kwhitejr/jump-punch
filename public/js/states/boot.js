@@ -2,7 +2,7 @@ JumpPunch.Boot = function () {
 
 };
 
-JumpPunch.Boot.prototype.preLoad = function () {
+JumpPunch.Boot.prototype.preload = function () {
   //will preload all assets
   //using functional and declarative programming, not imperatives!
   // `boot.js` will run functions for every asset declared in `assets.js`
@@ -12,10 +12,10 @@ JumpPunch.Boot.prototype.preLoad = function () {
     for (var asset in JumpPunch.ASSETS[type]) {
       JumpPunch.game.load[ type.toLowerCase() ](
         JumpPunch.ASSETS[type][ asset ].name,
+        JumpPunch.ASSETS[type][ asset ].path,
         JumpPunch.ASSETS[type][ asset ].width,
         JumpPunch.ASSETS[type][ asset ].height,
-        JumpPunch.ASSETS[type][ asset ].frames,
-        JumpPunch.ASSETS[type][ asset ].path
+        JumpPunch.ASSETS[type][ asset ].frames
       );
     }
   });
