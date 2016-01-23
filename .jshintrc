@@ -1,5 +1,3 @@
-// Explain to me again what this does?
-
 {
   "globals" : {
     "window" : true,

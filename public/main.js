@@ -16,5 +16,13 @@ window.JumpPunch = {
     BOOT : 'Boot',
     GAME : 'Game'
   }
+};
 
+// load Phaser on window load
+// avoid magic numbers: give everything context
+window.onload = function () {
+  JumpPunch.game = new Phaser.Game( JumpPunch.STAGE.WIDTH, JumpPunch.STAGE.HEIGHT, Phaser.AUTO, JumpPunch.STAGE_ID );
+  JumpPunch.game.state.add( JumpPunch.STATES.BOOT, JumpPunch.Boot );
+  JumpPunch.game.state.add( JumpPunch.STATES.GAME, JumpPunch.Game );
+  JumpPunch.game.state.start(JumpPunch.STATES.BOOT);
 };
