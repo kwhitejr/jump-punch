@@ -1,0 +1,13 @@
+// Explain to me again what this does?
+
+{
+  "globals" : {
+    "window" : true,
+    "JumpPunch" : true,
+    "Phaser" : true
+  },
+
+  "undef" : true,
+
+  "unused" : true
+}
