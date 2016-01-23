@@ -15,6 +15,12 @@
     RIGHT : 1
   };
 
+  function select_sprite_row(player_id) {
+    return function(frame_id) {
+      return frame_id + player_id*JumpPunch.ASSETS.SPRITESHEET.PLAYER.frames_per_row;
+    };
+  }
+
   // sprite class constructor
   JumpPunch.Player = function (game, id, name) {
     this.game = game;
@@ -29,7 +35,7 @@
     this.anchor = {x: 0.5, y: 0.5};
 
     // set animations
-    this.animations.add(ANIMATIONS.IDLE.name, ANIMATIONS.IDLE.frames);
+    this.animations.add(ANIMATIONS.IDLE.name, ANIMATIONS.IDLE.frames.map(select_sprite_row(this.id)));
 
     // play the initial animation
     this.animations.play(ANIMATIONS.IDLE.name, ANIMATIONS.IDLE.fps, true); // third argument is 'loop'
