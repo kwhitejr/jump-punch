@@ -5,7 +5,9 @@ JumpPunch.Boot = function () {
 JumpPunch.Boot.prototype.preLoad = function () {
   //will preload all assets
   //using functional and declarative programming, not imperatives!
+  // `boot.js` will run functions for every asset declared in `assets.js`
 
+  // autoLoad each asset by type
   Object.keys(JumpPunch.ASSETS).forEach(function(type) {
     for (var asset in JumpPunch.ASSETS[type]) {
       JumpPunch.game.load[ type.toLowerCase() ](
@@ -17,7 +19,6 @@ JumpPunch.Boot.prototype.preLoad = function () {
       );
     }
   });
-
 };
 
 JumpPunch.Boot.prototype.create = function () {
