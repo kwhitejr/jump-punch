@@ -16,6 +16,10 @@
   };
 
   var WALK_SPEED = 401;
+  var JUMP_HEIGHT = 1230;
+  var DIVE_SPEED = 400;
+  var DIVE_DISTANCE = 400; // horizontal length of dive
+  var DIVE_JUMP_TIMEOUT = 125;
 
   function select_sprite_row(player_id) {
     return function(frame_id) {
@@ -35,6 +39,8 @@
 
     // enable physics (adds this.body)
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
+
+
 
     // set center registration point
     this.anchor = {x: 0.5, y: 0.5};
@@ -69,17 +75,35 @@
 
   // Input actions
   JumpPunch.Player.prototype.jump = function () {
-    this.body.velocity.y = -WALK_SPEED;
+     // allow jumping from the floor (not in mid air)
+    if( this.body.y === JumpPunch.Game.FLOOR_Y ){
+      this.body.velocity.y = -JUMP_HEIGHT;
+    } else if( this.is_diving ){ // allow jump after dive (in mid air)
+      this.body.velocity.y = -JUMP_HEIGHT*(this.body.y/JumpPunch.Game.FLOOR_Y);
+    }
 
   };
 
   JumpPunch.Player.prototype.dive = function () {
-    this.body.velocity.y = WALK_SPEED;
+    if( this.body.y < JumpPunch.Game.FLOOR_Y ){
+      this.body.velocity.y = DIVE_SPEED;
+      this.body.velocity.x = DIVE_DISTANCE * FACING_FACTOR[ this.facing ];
+      this.is_diving = true;
+    }else{
+      this.body.velocity.y = 0;
+      this.body.velocity.x = 0;
+      this.is_diving = false;
+    }
 
   };
 
   JumpPunch.Player.prototype.dive_stop = function () {
+    // reset velocity
+    this.body.velocity.x = 0;
     this.body.velocity.y = 0;
+    setTimeout(function(){
+      this.is_diving = false;
+    }.bind(this), DIVE_JUMP_TIMEOUT);
   };
 
   JumpPunch.Player.prototype.step_left = function () {

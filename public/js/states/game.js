@@ -1,6 +1,8 @@
 
 (function(){
 
+  var GRAVITY = 1945;
+
   var INITIAL_POSITIONS = [
     // Player 1
     {x: 100, y: 100},
@@ -32,6 +34,8 @@
     this.input = new JumpPunch.GameInput(this);
   };
 
+  JumpPunch.Game.FLOOR_Y = 400;
+
   JumpPunch.Game.prototype.update = function () {
 
     // determine which direction each player is facing
@@ -42,6 +46,18 @@
       this.player_1.facing = JumpPunch.Player.FACING.LEFT;
       this.player_2.facing = JumpPunch.Player.FACING.RIGHT;
     }
+
+    [this.player_1, this.player_2].forEach(function(player){
+      // touching land or falling
+      if(player.body.y > JumpPunch.Game.FLOOR_Y){
+        player.body.y = JumpPunch.Game.FLOOR_Y;
+        player.body.velocity.y = 0;
+        player.body.acceleration.y = 0;
+      }else{
+        player.body.acceleration.y = GRAVITY;
+      }
+
+    });
   };
 
   JumpPunch.Game.prototype.shutdown = function () {
