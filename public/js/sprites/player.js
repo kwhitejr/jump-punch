@@ -15,11 +15,13 @@
     RIGHT : 1
   };
 
+  var WALK_SPEED = 401;
+
   function select_sprite_row(player_id) {
     return function(frame_id) {
       return frame_id + player_id*JumpPunch.ASSETS.SPRITESHEET.PLAYER.frames_per_row;
     };
-  }
+  };
 
   // sprite class constructor
   JumpPunch.Player = function (game, id, name) {
@@ -30,6 +32,9 @@
 
     // super constructor call
     Phaser.Sprite.call(this, game, 0, 0, JumpPunch.ASSETS.SPRITESHEET.PLAYER.name);
+
+    // enable physics (adds this.body)
+    this.game.physics.enable(this, Phaser.Physics.ARCADE);
 
     // set center registration point
     this.anchor = {x: 0.5, y: 0.5};
@@ -64,27 +69,30 @@
 
   // Input actions
   JumpPunch.Player.prototype.jump = function () {
+    this.body.velocity.y = -WALK_SPEED;
 
   };
 
   JumpPunch.Player.prototype.dive = function () {
+    this.body.velocity.y = WALK_SPEED;
 
   };
 
   JumpPunch.Player.prototype.dive_stop = function () {
-
+    this.body.velocity.y = 0;
   };
 
   JumpPunch.Player.prototype.step_left = function () {
-    console.log('stepping left');
+    this.body.velocity.x = -WALK_SPEED;
   };
 
   JumpPunch.Player.prototype.step_right = function () {
-
+    this.body.velocity.x = WALK_SPEED;
   };
 
+  // triggered on key up
   JumpPunch.Player.prototype.stop = function () {
-
+    this.body.velocity.x = 0;
   };
 
 })();
