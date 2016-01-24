@@ -62,4 +62,29 @@
 
   };
 
+  // Input actions
+  JumpPunch.Player.prototype.jump = function () {
+
+  };
+
+  JumpPunch.Player.prototype.dive = function () {
+
+  };
+
+  JumpPunch.Player.prototype.dive_stop = function () {
+
+  };
+
+  JumpPunch.Player.prototype.step_left = function () {
+    console.log('stepping left');
+  };
+
+  JumpPunch.Player.prototype.step_right = function () {
+
+  };
+
+  JumpPunch.Player.prototype.stop = function () {
+
+  };
+
 })();

@@ -27,6 +27,9 @@
 
     this.player_2.x = INITIAL_POSITIONS[1].x;
     this.player_2.y = INITIAL_POSITIONS[1].y;
+
+    // initialize input handler
+    this.input = new JumpPunch.GameInput(this);
   };
 
   JumpPunch.Game.prototype.update = function () {
@@ -42,6 +45,11 @@
   };
 
   JumpPunch.Game.prototype.shutdown = function () {
+
+  };
+
+  // Input actions
+  JumpPunch.Game.prototype.continue = function () {
 
   };
 
