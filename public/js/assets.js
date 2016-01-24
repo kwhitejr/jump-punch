@@ -19,5 +19,14 @@ JumpPunch.ASSETS = {
       frames : 18,
       frames_per_row : 9 // split spritesheet by player/row
     }
+  },
+
+  IMAGE : {
+    BG : {
+      name : 'bg',
+      path : 'assets/graphics/bg_900x600.jpg',
+      width : 900,
+      height : 600
+    }
   }
 };
